@@ -1,112 +1,86 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecovila Sustentar - Plataforma de Voluntariado</title>
+    <title>Página de Voluntariado - Ecovila Sustentar</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
-        }
-        .card h2 {
-            color: #333;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            color: #555;
-        }
-        .form-group input[type="text"],
-        .form-group input[type="number"],
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .form-group button:hover {
-            background-color: #45a049;
-        }
-        .result {
-            margin-top: 15px;
-            font-weight: bold;
-            color: #333;
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 600px; margin: auto; }
+        .card { background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h2 { text-align: center; color: #4CAF50; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 8px; margin-bottom: 10px; }
+        button { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        #atividadeSelecionada { margin-top: 20px; color: #4CAF50; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Moeda Sustentar</h2>
-    <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" placeholder="Digite seu nome">
+<div class="container">
+    <div class="card">
+        <h2>Escolha de Atividade de Voluntariado</h2>
+        <div class="form-group">
+            <label for="voluntarioNome">Nome do Voluntário:</label>
+            <input type="text" id="voluntarioNome" placeholder="Digite seu nome">
+        </div>
+        <div class="form-group">
+            <label for="atividade">Selecione uma Atividade Disponível:</label>
+            <select id="atividade">
+                <option value="">Escolha uma atividade...</option>
+                <option value="Desenvolvimento Web">Desenvolvimento Web</option>
+                <option value="Escrita de Conteúdo">Escrita de Conteúdo</option>
+                <option value="Limpeza e Organização">Limpeza e Organização</option>
+                <option value="Artes Visuais">Artes Visuais</option>
+                <option value="Cuidado com a Fogueira">Cuidado com a Fogueira</option>
+                <option value="Gestão de Redes Sociais">Gestão de Redes Sociais</option>
+                <option value="Escrita de Artigos">Escrita de Artigos</option>
+            </select>
+        </div>
+        <button onclick="reservarTarefa()">Reservar Tarefa</button>
+        <div id="atividadeSelecionada"></div>
     </div>
-    <div class="form-group">
-        <label for="atividade">Selecione a Atividade:</label>
-        <select id="atividade">
-            <option value="Desenvolvimento Web">Desenvolvimento Web</option>
-            <option value="Escrita de Conteúdo">Escrita de Conteúdo</option>
-            <option value="Limpezas">Limpezas</option>
-            <option value="Artes">Artes</option>
-            <option value="Fogueira">Fogueira</option>
-            <option value="Publicação">Publicação</option>
-            <option value="Artigos">Artigos</option>
-        </select>
+
+    <div class="card">
+        <h2>Atividades em Andamento</h2>
+        <ul id="atividadesEmAndamento"></ul>
     </div>
-    <div class="form-group">
-        <label for="horas">Horas Trabalhadas:</label>
-        <input type="number" id="horas" placeholder="Digite as horas trabalhadas">
-    </div>
-    <div class="form-group">
-        <button onclick="calcularMoedas()">Calcular Moedas</button>
-    </div>
-    <div class="result" id="resultado"></div>
 </div>
 
 <script>
-    function calcularMoedas() {
-        const nome = document.getElementById("nome").value;
-        const atividade = document.getElementById("atividade").value;
-        const horas = document.getElementById("horas").value;
+    function reservarTarefa() {
+        const nomeVoluntario = document.getElementById("voluntarioNome").value;
+        const atividadeSelecionada = document.getElementById("atividade").value;
+        const listaAtividades = document.getElementById("atividade");
 
-        if (nome && atividade && horas) {
-            const moedas = horas * 10; // Cada hora vale 10 moedas, por exemplo
-            document.getElementById("resultado").innerText = 
-                `Olá, ${nome}! Você acumulou ${moedas} Moedas Sustentar na atividade "${atividade}".`;
+        if (nomeVoluntario && atividadeSelecionada) {
+            // Mensagem de confirmação de reserva
+            document.getElementById("atividadeSelecionada").innerHTML = `A atividade "<b>${atividadeSelecionada}</b>" foi reservada por <b>${nomeVoluntario}</b>!`;
 
-            // Aqui você poderia adicionar uma função para enviar os dados para o servidor, onde os moderadores aprovam.
+            // Adicionar atividade em andamento
+            const listaEmAndamento = document.getElementById("atividadesEmAndamento");
+            const novaAtividade = document.createElement("li");
+            novaAtividade.innerHTML = `<b>${atividadeSelecionada}</b> - em andamento por ${nomeVoluntario}`;
+            listaEmAndamento.appendChild(novaAtividade);
+
+            // Remover a atividade do dropdown
+            for (let i = 0; i < listaAtividades.options.length; i++) {
+                if (listaAtividades.options[i].value === atividadeSelecionada) {
+                    listaAtividades.remove(i);
+                    break;
+                }
+            }
+            
+            // Limpar campos após reserva
+            document.getElementById("voluntarioNome").value = "";
+            document.getElementById("atividade").value = "";
+
+            // Enviar "notificação" de que a tarefa foi reservada
+            alert(`Notificação: ${nomeVoluntario} começou a trabalhar em "${atividadeSelecionada}".`);
         } else {
-            alert("Por favor, preencha todos os campos.");
+            alert("Por favor, preencha todos os campos!");
         }
     }
 </script>
