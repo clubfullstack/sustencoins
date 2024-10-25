@@ -123,7 +123,6 @@
 
 <script>
     let totalMoedas = 0;
-
     const moedasVoluntarios = {};
 
     function atribuirTarefa(tarefa) {
@@ -140,33 +139,41 @@
         }
     }
 
- function reservarTarefa() {
+    function reservarTarefa() {
         const nomeVoluntario = document.getElementById("voluntarioNome").value;
         const atividadeSelecionada = document.getElementById("atividade").value;
         const listaAtividades = document.getElementById("atividade");
 
         if (nomeVoluntario && atividadeSelecionada) {
-            document.getElementById(atividadeSelecionada).innerText = nomeVoluntario;
-            document.getElementById("atividadeSelecionada").innerHTML = `A atividade "<b>${atividadeSelecionada}</b>" foi reservada por <b>${nomeVoluntario}</b>!`;
+            const atividadeElemento = document.getElementById(atividadeSelecionada);
+            if (atividadeElemento) {
+                atividadeElemento.innerText = nomeVoluntario;
+                document.getElementById("atividadeSelecionada").innerHTML = `A atividade "<b>${atividadeSelecionada}</b>" foi reservada por <b>${nomeVoluntario}</b>!`;
 
-            for (let i = 0; i < listaAtividades.options.length; i++) {
-                if (listaAtividades.options[i].value === atividadeSelecionada) {
-                    listaAtividades.remove(i);
-                    break;
+                // Remover a atividade selecionada da lista de opções
+                for (let i = 0; i < listaAtividades.options.length; i++) {
+                    if (listaAtividades.options[i].value === atividadeSelecionada) {
+                        listaAtividades.remove(i);
+                        break;
+                    }
                 }
+
+                const moedasGanhas = 50; // Exemplo de moedas ganhas por tarefa
+                totalMoedas += moedasGanhas;
+                document.getElementById("totalMoedas").innerText = `Total de Moedas Sustentar: ${totalMoedas}`;
+
+                // Registrar moedas para o voluntário
+                if (!moedasVoluntarios[nomeVoluntario]) moedasVoluntarios[nomeVoluntario] = 0;
+                moedasVoluntarios[nomeVoluntario] += moedasGanhas;
+
+                // Limpar campos de entrada
+                document.getElementById("voluntarioNome").value = "";
+                document.getElementById("atividade").value = "";
+
+                alert(`Notificação: ${nomeVoluntario} começou a trabalhar em "${atividadeSelecionada}".`);
+            } else {
+                alert("Atividade selecionada não encontrada.");
             }
-
-            const moedasGanhas = 50; // Exemplo de moedas ganhas por tarefa
-            totalMoedas += moedasGanhas;
-            document.getElementById("totalMoedas").innerText = `Total de Moedas Sustentar: ${totalMoedas}`;
-
-            if (!moedasVoluntarios[nomeVoluntario]) moedasVoluntarios[nomeVoluntario] = 0;
-            moedasVoluntarios[nomeVoluntario] += moedasGanhas;
-
-            document.getElementById("voluntarioNome").value = "";
-            document.getElementById("atividade").value = "";
-
-            alert(`Notificação: ${nomeVoluntario} começou a trabalhar em "${atividadeSelecionada}".`);
         } else {
             alert("Por favor, preencha todos os campos!");
         }
@@ -178,6 +185,7 @@
         document.getElementById("moedasVoluntario").innerText = `Moedas Acumuladas: ${moedas}`;
     }
 </script>
+
 
 </body>
 </html>
