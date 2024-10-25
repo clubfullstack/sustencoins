@@ -8,10 +8,13 @@
         body { font-family: Arial, sans-serif; margin: 20px; }
         .container { max-width: 700px; margin: auto; }
         .card { background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .card-item { background-color: #e3f2fd; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); margin: 15px; padding: 10px; text-align: center; width: calc(50% - 20px); display: inline-block; vertical-align: top; }
-        .card-item img { width: 100%; border-radius: 5px; max-height: 150px; object-fit: cover; margin: 10px 0; }
         .moedas-indicador { position: fixed; top: 20px; right: 20px; background-color: #4CAF50; color: white; padding: 10px; border-radius: 5px; font-weight: bold; }
-        h2 { text-align: center; color: #4CAF50; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        .cardapio { display: flex; flex-wrap: wrap; gap: 20px; }
+        .card-item { background-color: #e3f2fd; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); width: calc(50% - 10px); padding: 10px; text-align: center; }
+        .card-item img { width: 100%; border-radius: 5px; max-height: 120px; object-fit: cover; margin: 10px 0; }
         .valor { font-weight: bold; color: #4CAF50; margin-top: 10px; }
     </style>
 </head>
@@ -23,44 +26,85 @@
 
 <div class="container">
     <div class="card">
+        <h2>Painel de Voluntariado - Ecovila Sustentar</h2>
+        <table id="tabelaAtividades">
+            <thead>
+                <tr>
+                    <th>Atividade</th>
+                    <th>Voluntário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Desenvolvimento Web</td><td><button onclick="atribuirTarefa('Desenvolvimento Web')">Selecionar</button></td></tr>
+                <tr><td>Escrita de Conteúdo</td><td><button onclick="atribuirTarefa('Escrita de Conteúdo')">Selecionar</button></td></tr>
+                <tr><td>Limpezas</td><td><button onclick="atribuirTarefa('Limpezas')">Selecionar</button></td></tr>
+                <tr><td>Artes</td><td><button onclick="atribuirTarefa('Artes')">Selecionar</button></td></tr>
+                <tr><td>Fogueira</td><td><button onclick="atribuirTarefa('Fogueira')">Selecionar</button></td></tr>
+                <tr><td>Publicação</td><td><button onclick="atribuirTarefa('Publicação')">Selecionar</button></td></tr>
+                <tr><td>Artigos</td><td><button onclick="atribuirTarefa('Artigos')">Selecionar</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
         <h2>Cardápio de Moedas Sustentar</h2>
-        <div class="card-item">
-            <h3>Vivência Dançando a Natureza</h3>
-            <img src="https://via.placeholder.com/150" alt="Vivência Dançando a Natureza">
-            <p class="valor">500 Moedas + R$ 100</p>
-        </div>
-        <div class="card-item">
-            <h3>Estadia em Quarto de Solteiro na Casa Sede</h3>
-            <img src="https://via.placeholder.com/150" alt="Estadia em Quarto de Solteiro">
-            <p class="valor">100 Moedas + R$ 40</p>
-        </div>
-        <div class="card-item">
-            <h3>Uso do Espaço na Sede para Oficinas</h3>
-            <img src="https://via.placeholder.com/150" alt="Uso do Espaço na Sede">
-            <p class="valor">1000 Moedas + R$ 100</p>
-        </div>
-        <div class="card-item">
-            <h3>Mel</h3>
-            <img src="https://via.placeholder.com/150" alt="Pote de Mel">
-            <p class="valor">50 Moedas + R$ 10</p>
-        </div>
-        <div class="card-item">
-            <h3>Terapia das Abelhas</h3>
-            <img src="https://via.placeholder.com/150" alt="Terapia das Abelhas">
-            <p class="valor">50 Moedas</p>
-        </div>
-        <div class="card-item">
-            <h3>Um Dia na Sustentar</h3>
-            <img src="https://via.placeholder.com/150" alt="Um Dia na Sustentar">
-            <p class="valor">500 Moedas</p>
-        </div>
-        <div class="card-item">
-            <h3>Ingresso para Festival SustentArte</h3>
-            <img src="https://via.placeholder.com/150" alt="Ingresso para Festival SustentArte">
-            <p class="valor">1000 Moedas</p>
+        <div class="cardapio">
+            <div class="card-item">
+                <h3>Vivência Dançando a Natureza</h3>
+                <img src="https://via.placeholder.com/150" alt="Vivência Dançando a Natureza">
+                <p class="valor">500 Moedas + R$ 100</p>
+            </div>
+            <div class="card-item">
+                <h3>Estadia em Quarto de Solteiro na Casa Sede</h3>
+                <img src="https://via.placeholder.com/150" alt="Estadia na Casa Sede">
+                <p class="valor">100 Moedas + R$ 40</p>
+            </div>
+            <div class="card-item">
+                <h3>Uso do Espaço na Sede para Oficinas</h3>
+                <img src="https://via.placeholder.com/150" alt="Espaço para Oficinas">
+                <p class="valor">1000 Moedas + R$ 100</p>
+            </div>
+            <div class="card-item">
+                <h3>Mel</h3>
+                <img src="https://via.placeholder.com/150" alt="Mel Sustentar">
+                <p class="valor">50 Moedas + R$ 10</p>
+            </div>
+            <div class="card-item">
+                <h3>Terapia das Abelhas</h3>
+                <img src="https://via.placeholder.com/150" alt="Terapia das Abelhas">
+                <p class="valor">50 Moedas</p>
+            </div>
+            <div class="card-item">
+                <h3>Um Dia na Sustentar</h3>
+                <img src="https://via.placeholder.com/150" alt="Um Dia na Sustentar">
+                <p class="valor">500 Moedas</p>
+            </div>
+            <div class="card-item">
+                <h3>Ingresso para Festival SustentArte</h3>
+                <img src="https://via.placeholder.com/150" alt="Festival SustentArte">
+                <p class="valor">1000 Moedas</p>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    let totalMoedas = 0;
+
+    function atribuirTarefa(tarefa) {
+        const tabela = document.getElementById("tabelaAtividades");
+        for (let i = 1; i < tabela.rows.length; i++) {
+            if (tabela.rows[i].cells[0].innerText === tarefa && tabela.rows[i].cells[1].innerText === "Selecionar") {
+                const voluntario = prompt("Digite seu nome para assumir esta tarefa:");
+                if (voluntario) {
+                    tabela.rows[i].cells[1].innerText = voluntario;
+                    alert(`${voluntario} está agora trabalhando na tarefa: ${tarefa}`);
+                }
+                break;
+            }
+        }
+    }
+</script>
 
 </body>
 </html>
