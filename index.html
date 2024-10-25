@@ -18,9 +18,14 @@
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #4CAF50; color: white; }
+        .moedas-indicador { position: fixed; top: 20px; right: 20px; background-color: #4CAF50; color: white; padding: 10px; border-radius: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
+
+<div class="moedas-indicador" id="totalMoedas">
+    Total de Moedas Sustentar: 0
+</div>
 
 <div class="container">
     <div class="card">
@@ -66,22 +71,44 @@
             </tbody>
         </table>
     </div>
+
+    <div class="card">
+        <h2>Moedas Sustentar Acumuladas</h2>
+        <div class="form-group">
+            <label for="visualizarMoedas">Nome do Voluntário:</label>
+            <input type="text" id="visualizarMoedas" placeholder="Digite seu nome">
+        </div>
+        <button onclick="visualizarMoedas()">Verificar Moedas Acumuladas</button>
+        <div id="moedasVoluntario" style="margin-top: 10px; font-weight: bold;"></div>
+    </div>
+
+    <div class="card">
+        <h2>Cardápio de Moedas Sustentar</h2>
+        <ul>
+            <li>Vivência Dançando a Natureza: 500 Moedas + R$ 100</li>
+            <li>Estadia em Quarto de Solteiro na Casa Sede: 100 Moedas + R$ 40</li>
+            <li>Uso do Espaço na Sede para Oficinas: 1000 Moedas + R$ 100</li>
+            <li>Mel: 50 Moedas + R$ 10</li>
+            <li>Terapia das Abelhas: 50 Moedas</li>
+            <li>Um Dia na Sustentar: 500 Moedas</li>
+            <li>Ingresso para Festival SustentArte: 1000 Moedas</li>
+        </ul>
+    </div>
 </div>
 
 <script>
+    let totalMoedas = 0;
+    const moedasVoluntarios = {};
+
     function reservarTarefa() {
         const nomeVoluntario = document.getElementById("voluntarioNome").value;
         const atividadeSelecionada = document.getElementById("atividade").value;
         const listaAtividades = document.getElementById("atividade");
 
         if (nomeVoluntario && atividadeSelecionada) {
-            // Registrar voluntário na planilha
             document.getElementById(atividadeSelecionada).innerText = nomeVoluntario;
-
-            // Mensagem de confirmação de reserva
             document.getElementById("atividadeSelecionada").innerHTML = `A atividade "<b>${atividadeSelecionada}</b>" foi reservada por <b>${nomeVoluntario}</b>!`;
 
-            // Remover atividade do dropdown
             for (let i = 0; i < listaAtividades.options.length; i++) {
                 if (listaAtividades.options[i].value === atividadeSelecionada) {
                     listaAtividades.remove(i);
@@ -89,15 +116,26 @@
                 }
             }
 
-            // Limpar campos após reserva
+            const moedasGanhas = 50; // Exemplo de moedas ganhas por tarefa
+            totalMoedas += moedasGanhas;
+            document.getElementById("totalMoedas").innerText = `Total de Moedas Sustentar: ${totalMoedas}`;
+
+            if (!moedasVoluntarios[nomeVoluntario]) moedasVoluntarios[nomeVoluntario] = 0;
+            moedasVoluntarios[nomeVoluntario] += moedasGanhas;
+
             document.getElementById("voluntarioNome").value = "";
             document.getElementById("atividade").value = "";
 
-            // Notificar sobre reserva
             alert(`Notificação: ${nomeVoluntario} começou a trabalhar em "${atividadeSelecionada}".`);
         } else {
             alert("Por favor, preencha todos os campos!");
         }
+    }
+
+    function visualizarMoedas() {
+        const nomeVoluntario = document.getElementById("visualizarMoedas").value;
+        const moedas = moedasVoluntarios[nomeVoluntario] || 0;
+        document.getElementById("moedasVoluntario").innerText = `Moedas Acumuladas: ${moedas}`;
     }
 </script>
 
