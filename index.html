@@ -1,1 +1,115 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecovila Sustentar - Plataforma de Voluntariado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+        .card h2 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            color: #555;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Moeda Sustentar</h2>
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome">
+    </div>
+    <div class="form-group">
+        <label for="atividade">Selecione a Atividade:</label>
+        <select id="atividade">
+            <option value="Desenvolvimento Web">Desenvolvimento Web</option>
+            <option value="Escrita de Conteúdo">Escrita de Conteúdo</option>
+            <option value="Limpezas">Limpezas</option>
+            <option value="Artes">Artes</option>
+            <option value="Fogueira">Fogueira</option>
+            <option value="Publicação">Publicação</option>
+            <option value="Artigos">Artigos</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="horas">Horas Trabalhadas:</label>
+        <input type="number" id="horas" placeholder="Digite as horas trabalhadas">
+    </div>
+    <div class="form-group">
+        <button onclick="calcularMoedas()">Calcular Moedas</button>
+    </div>
+    <div class="result" id="resultado"></div>
+</div>
+
+<script>
+    function calcularMoedas() {
+        const nome = document.getElementById("nome").value;
+        const atividade = document.getElementById("atividade").value;
+        const horas = document.getElementById("horas").value;
+
+        if (nome && atividade && horas) {
+            const moedas = horas * 10; // Cada hora vale 10 moedas, por exemplo
+            document.getElementById("resultado").innerText = 
+                `Olá, ${nome}! Você acumulou ${moedas} Moedas Sustentar na atividade "${atividade}".`;
+
+            // Aqui você poderia adicionar uma função para enviar os dados para o servidor, onde os moderadores aprovam.
+        } else {
+            alert("Por favor, preencha todos os campos.");
+        }
+    }
+</script>
+
+</body>
+</html>
