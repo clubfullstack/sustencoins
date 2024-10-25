@@ -8,17 +8,11 @@
         body { font-family: Arial, sans-serif; margin: 20px; }
         .container { max-width: 700px; margin: auto; }
         .card { background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        h2 { text-align: center; color: #4CAF50; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input, select { width: 100%; padding: 8px; margin-bottom: 10px; }
-        button { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background-color: #45a049; }
-        #atividadeSelecionada { margin-top: 20px; color: #4CAF50; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #4CAF50; color: white; }
+        .card-item { background-color: #e3f2fd; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); margin: 15px; padding: 10px; text-align: center; width: calc(50% - 20px); display: inline-block; vertical-align: top; }
+        .card-item img { width: 100%; border-radius: 5px; max-height: 150px; object-fit: cover; margin: 10px 0; }
         .moedas-indicador { position: fixed; top: 20px; right: 20px; background-color: #4CAF50; color: white; padding: 10px; border-radius: 5px; font-weight: bold; }
+        h2 { text-align: center; color: #4CAF50; }
+        .valor { font-weight: bold; color: #4CAF50; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -29,115 +23,44 @@
 
 <div class="container">
     <div class="card">
-        <h2>Escolha de Atividade de Voluntariado</h2>
-        <div class="form-group">
-            <label for="voluntarioNome">Nome do Voluntário:</label>
-            <input type="text" id="voluntarioNome" placeholder="Digite seu nome">
-        </div>
-        <div class="form-group">
-            <label for="atividade">Selecione uma Atividade Disponível:</label>
-            <select id="atividade">
-                <option value="">Escolha uma atividade...</option>
-                <option value="Desenvolvimento Web">Desenvolvimento Web</option>
-                <option value="Escrita de Conteúdo">Escrita de Conteúdo</option>
-                <option value="Limpeza e Organização">Limpeza e Organização</option>
-                <option value="Artes Visuais">Artes Visuais</option>
-                <option value="Cuidado com a Fogueira">Cuidado com a Fogueira</option>
-                <option value="Gestão de Redes Sociais">Gestão de Redes Sociais</option>
-                <option value="Escrita de Artigos">Escrita de Artigos</option>
-            </select>
-        </div>
-        <button onclick="reservarTarefa()">Reservar Tarefa</button>
-        <div id="atividadeSelecionada"></div>
-    </div>
-
-    <div class="card">
-        <h2>Planilha de Atividades e Voluntários</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Atividade</th>
-                    <th>Voluntário</th>
-                </tr>
-            </thead>
-            <tbody id="planilhaAtividades">
-                <tr><td>Desenvolvimento Web</td><td id="Desenvolvimento Web"></td></tr>
-                <tr><td>Escrita de Conteúdo</td><td id="Escrita de Conteúdo"></td></tr>
-                <tr><td>Limpeza e Organização</td><td id="Limpeza e Organização"></td></tr>
-                <tr><td>Artes Visuais</td><td id="Artes Visuais"></td></tr>
-                <tr><td>Cuidado com a Fogueira</td><td id="Cuidado com a Fogueira"></td></tr>
-                <tr><td>Gestão de Redes Sociais</td><td id="Gestão de Redes Sociais"></td></tr>
-                <tr><td>Escrita de Artigos</td><td id="Escrita de Artigos"></td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="card">
-        <h2>Moedas Sustentar Acumuladas</h2>
-        <div class="form-group">
-            <label for="visualizarMoedas">Nome do Voluntário:</label>
-            <input type="text" id="visualizarMoedas" placeholder="Digite seu nome">
-        </div>
-        <button onclick="visualizarMoedas()">Verificar Moedas Acumuladas</button>
-        <div id="moedasVoluntario" style="margin-top: 10px; font-weight: bold;"></div>
-    </div>
-
-    <div class="card">
         <h2>Cardápio de Moedas Sustentar</h2>
-        <ul>
-            <li>Vivência Dançando a Natureza: 500 Moedas + R$ 100</li>
-            <li>Estadia em Quarto de Solteiro na Casa Sede: 100 Moedas + R$ 40</li>
-            <li>Uso do Espaço na Sede para Oficinas: 1000 Moedas + R$ 100</li>
-            <li>Mel: 50 Moedas + R$ 10</li>
-            <li>Terapia das Abelhas: 50 Moedas</li>
-            <li>Um Dia na Sustentar: 500 Moedas</li>
-            <li>Ingresso para Festival SustentArte: 1000 Moedas</li>
-        </ul>
+        <div class="card-item">
+            <h3>Vivência Dançando a Natureza</h3>
+            <img src="https://via.placeholder.com/150" alt="Vivência Dançando a Natureza">
+            <p class="valor">500 Moedas + R$ 100</p>
+        </div>
+        <div class="card-item">
+            <h3>Estadia em Quarto de Solteiro na Casa Sede</h3>
+            <img src="https://via.placeholder.com/150" alt="Estadia em Quarto de Solteiro">
+            <p class="valor">100 Moedas + R$ 40</p>
+        </div>
+        <div class="card-item">
+            <h3>Uso do Espaço na Sede para Oficinas</h3>
+            <img src="https://via.placeholder.com/150" alt="Uso do Espaço na Sede">
+            <p class="valor">1000 Moedas + R$ 100</p>
+        </div>
+        <div class="card-item">
+            <h3>Mel</h3>
+            <img src="https://via.placeholder.com/150" alt="Pote de Mel">
+            <p class="valor">50 Moedas + R$ 10</p>
+        </div>
+        <div class="card-item">
+            <h3>Terapia das Abelhas</h3>
+            <img src="https://via.placeholder.com/150" alt="Terapia das Abelhas">
+            <p class="valor">50 Moedas</p>
+        </div>
+        <div class="card-item">
+            <h3>Um Dia na Sustentar</h3>
+            <img src="https://via.placeholder.com/150" alt="Um Dia na Sustentar">
+            <p class="valor">500 Moedas</p>
+        </div>
+        <div class="card-item">
+            <h3>Ingresso para Festival SustentArte</h3>
+            <img src="https://via.placeholder.com/150" alt="Ingresso para Festival SustentArte">
+            <p class="valor">1000 Moedas</p>
+        </div>
     </div>
 </div>
-
-<script>
-    let totalMoedas = 0;
-    const moedasVoluntarios = {};
-
-    function reservarTarefa() {
-        const nomeVoluntario = document.getElementById("voluntarioNome").value;
-        const atividadeSelecionada = document.getElementById("atividade").value;
-        const listaAtividades = document.getElementById("atividade");
-
-        if (nomeVoluntario && atividadeSelecionada) {
-            document.getElementById(atividadeSelecionada).innerText = nomeVoluntario;
-            document.getElementById("atividadeSelecionada").innerHTML = `A atividade "<b>${atividadeSelecionada}</b>" foi reservada por <b>${nomeVoluntario}</b>!`;
-
-            for (let i = 0; i < listaAtividades.options.length; i++) {
-                if (listaAtividades.options[i].value === atividadeSelecionada) {
-                    listaAtividades.remove(i);
-                    break;
-                }
-            }
-
-            const moedasGanhas = 50; // Exemplo de moedas ganhas por tarefa
-            totalMoedas += moedasGanhas;
-            document.getElementById("totalMoedas").innerText = `Total de Moedas Sustentar: ${totalMoedas}`;
-
-            if (!moedasVoluntarios[nomeVoluntario]) moedasVoluntarios[nomeVoluntario] = 0;
-            moedasVoluntarios[nomeVoluntario] += moedasGanhas;
-
-            document.getElementById("voluntarioNome").value = "";
-            document.getElementById("atividade").value = "";
-
-            alert(`Notificação: ${nomeVoluntario} começou a trabalhar em "${atividadeSelecionada}".`);
-        } else {
-            alert("Por favor, preencha todos os campos!");
-        }
-    }
-
-    function visualizarMoedas() {
-        const nomeVoluntario = document.getElementById("visualizarMoedas").value;
-        const moedas = moedasVoluntarios[nomeVoluntario] || 0;
-        document.getElementById("moedasVoluntario").innerText = `Moedas Acumuladas: ${moedas}`;
-    }
-</script>
 
 </body>
 </html>
