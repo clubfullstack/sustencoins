@@ -6,7 +6,7 @@
     <title>Página de Voluntariado - Ecovila Sustentar</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        .container { max-width: 600px; margin: auto; }
+        .container { max-width: 700px; margin: auto; }
         .card { background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
         h2 { text-align: center; color: #4CAF50; }
         .form-group { margin-bottom: 15px; }
@@ -15,6 +15,9 @@
         button { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
         button:hover { background-color: #45a049; }
         #atividadeSelecionada { margin-top: 20px; color: #4CAF50; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
     </style>
 </head>
 <body>
@@ -44,8 +47,24 @@
     </div>
 
     <div class="card">
-        <h2>Atividades em Andamento</h2>
-        <ul id="atividadesEmAndamento"></ul>
+        <h2>Planilha de Atividades e Voluntários</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Atividade</th>
+                    <th>Voluntário</th>
+                </tr>
+            </thead>
+            <tbody id="planilhaAtividades">
+                <tr><td>Desenvolvimento Web</td><td id="Desenvolvimento Web"></td></tr>
+                <tr><td>Escrita de Conteúdo</td><td id="Escrita de Conteúdo"></td></tr>
+                <tr><td>Limpeza e Organização</td><td id="Limpeza e Organização"></td></tr>
+                <tr><td>Artes Visuais</td><td id="Artes Visuais"></td></tr>
+                <tr><td>Cuidado com a Fogueira</td><td id="Cuidado com a Fogueira"></td></tr>
+                <tr><td>Gestão de Redes Sociais</td><td id="Gestão de Redes Sociais"></td></tr>
+                <tr><td>Escrita de Artigos</td><td id="Escrita de Artigos"></td></tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -56,28 +75,25 @@
         const listaAtividades = document.getElementById("atividade");
 
         if (nomeVoluntario && atividadeSelecionada) {
+            // Registrar voluntário na planilha
+            document.getElementById(atividadeSelecionada).innerText = nomeVoluntario;
+
             // Mensagem de confirmação de reserva
             document.getElementById("atividadeSelecionada").innerHTML = `A atividade "<b>${atividadeSelecionada}</b>" foi reservada por <b>${nomeVoluntario}</b>!`;
 
-            // Adicionar atividade em andamento
-            const listaEmAndamento = document.getElementById("atividadesEmAndamento");
-            const novaAtividade = document.createElement("li");
-            novaAtividade.innerHTML = `<b>${atividadeSelecionada}</b> - em andamento por ${nomeVoluntario}`;
-            listaEmAndamento.appendChild(novaAtividade);
-
-            // Remover a atividade do dropdown
+            // Remover atividade do dropdown
             for (let i = 0; i < listaAtividades.options.length; i++) {
                 if (listaAtividades.options[i].value === atividadeSelecionada) {
                     listaAtividades.remove(i);
                     break;
                 }
             }
-            
+
             // Limpar campos após reserva
             document.getElementById("voluntarioNome").value = "";
             document.getElementById("atividade").value = "";
 
-            // Enviar "notificação" de que a tarefa foi reservada
+            // Notificar sobre reserva
             alert(`Notificação: ${nomeVoluntario} começou a trabalhar em "${atividadeSelecionada}".`);
         } else {
             alert("Por favor, preencha todos os campos!");
