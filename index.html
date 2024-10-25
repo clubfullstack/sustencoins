@@ -46,6 +46,39 @@
         </table>
     </div>
 
+ <div class="card">
+        <h2>Planilha de Atividades e Voluntários</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Atividade</th>
+                    <th>Voluntário</th>
+                </tr>
+            </thead>
+            <tbody id="planilhaAtividades">
+                <tr><td>Desenvolvimento Web</td><td id="Desenvolvimento Web"></td></tr>
+                <tr><td>Escrita de Conteúdo</td><td id="Escrita de Conteúdo"></td></tr>
+                <tr><td>Limpeza e Organização</td><td id="Limpeza e Organização"></td></tr>
+                <tr><td>Artes Visuais</td><td id="Artes Visuais"></td></tr>
+                <tr><td>Cuidado com a Fogueira</td><td id="Cuidado com a Fogueira"></td></tr>
+                <tr><td>Gestão de Redes Sociais</td><td id="Gestão de Redes Sociais"></td></tr>
+                <tr><td>Escrita de Artigos</td><td id="Escrita de Artigos"></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Moedas Sustentar Acumuladas</h2>
+        <div class="form-group">
+            <label for="visualizarMoedas">Nome do Voluntário:</label>
+            <input type="text" id="visualizarMoedas" placeholder="Digite seu nome">
+        </div>
+        <button onclick="visualizarMoedas()">Verificar Moedas Acumuladas</button>
+        <div id="moedasVoluntario" style="margin-top: 10px; font-weight: bold;"></div>
+    </div>
+
+
+
     <div class="card">
         <h2>Cardápio de Moedas Sustentar</h2>
         <div class="cardapio">
@@ -91,6 +124,8 @@
 <script>
     let totalMoedas = 0;
 
+    const moedasVoluntarios = {};
+
     function atribuirTarefa(tarefa) {
         const tabela = document.getElementById("tabelaAtividades");
         for (let i = 1; i < tabela.rows.length; i++) {
@@ -103,6 +138,44 @@
                 break;
             }
         }
+    }
+
+ function reservarTarefa() {
+        const nomeVoluntario = document.getElementById("voluntarioNome").value;
+        const atividadeSelecionada = document.getElementById("atividade").value;
+        const listaAtividades = document.getElementById("atividade");
+
+        if (nomeVoluntario && atividadeSelecionada) {
+            document.getElementById(atividadeSelecionada).innerText = nomeVoluntario;
+            document.getElementById("atividadeSelecionada").innerHTML = `A atividade "<b>${atividadeSelecionada}</b>" foi reservada por <b>${nomeVoluntario}</b>!`;
+
+            for (let i = 0; i < listaAtividades.options.length; i++) {
+                if (listaAtividades.options[i].value === atividadeSelecionada) {
+                    listaAtividades.remove(i);
+                    break;
+                }
+            }
+
+            const moedasGanhas = 50; // Exemplo de moedas ganhas por tarefa
+            totalMoedas += moedasGanhas;
+            document.getElementById("totalMoedas").innerText = `Total de Moedas Sustentar: ${totalMoedas}`;
+
+            if (!moedasVoluntarios[nomeVoluntario]) moedasVoluntarios[nomeVoluntario] = 0;
+            moedasVoluntarios[nomeVoluntario] += moedasGanhas;
+
+            document.getElementById("voluntarioNome").value = "";
+            document.getElementById("atividade").value = "";
+
+            alert(`Notificação: ${nomeVoluntario} começou a trabalhar em "${atividadeSelecionada}".`);
+        } else {
+            alert("Por favor, preencha todos os campos!");
+        }
+    }
+
+    function visualizarMoedas() {
+        const nomeVoluntario = document.getElementById("visualizarMoedas").value;
+        const moedas = moedasVoluntarios[nomeVoluntario] || 0;
+        document.getElementById("moedasVoluntario").innerText = `Moedas Acumuladas: ${moedas}`;
     }
 </script>
 
